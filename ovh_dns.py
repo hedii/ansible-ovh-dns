@@ -53,6 +53,23 @@ options:
         choices: ['present', 'absent']
         description:
             - Determines wether the record is to be created/modified or deleted
+    ovh_endpoint:
+        required false
+        default 'ovh-eu'
+        description:
+            - The ovh api endpoint
+    ovh_application_key:
+        required: true
+        description:
+            - The ovh api application key
+    ovh_application_secret:
+        required: true
+        description:
+            - The ovh api application secret
+    ovh_consumer_key:
+        required: true
+        description:
+            - The ovh api consumer key
 '''
 
 EXAMPLES = '''
@@ -124,7 +141,12 @@ def main():
     state  = module.params.get('state')
 
     # Connect to OVH API
-    client = ovh.Client()
+    client = ovh.Client({
+        endpoint: module.params.get('ovh_endpoint'),
+        application_key: module.params.get('ovh_application_key'),
+        application_secret: module.params.get('ovh_application_secret'),
+        consumer_key: module.params.get('ovh_consumer_key')
+    })
 
     # Check that the domain exists
     domains = client.get('/domain/zone')
