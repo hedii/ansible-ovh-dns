@@ -56,6 +56,7 @@ options:
     ovh_endpoint:
         required false
         default 'ovh-eu'
+        choices: ['ovh-eu', 'ovh-us', 'ovh-ca']
         description:
             - The ovh api endpoint
     ovh_application_key:
@@ -131,6 +132,10 @@ def main():
             value = dict(default=''),
             type = dict(default='A', choices=['A', 'AAAA', 'CNAME', 'DKIM', 'LOC', 'MX', 'NAPTR', 'NS', 'PTR', 'SPF', 'SRV', 'SSHFP', 'TXT']),
             state = dict(default='present', choices=['present', 'absent']),
+            ovh_endpoint = dict(default='ovh-eu', choices=['ovh-eu', 'ovh-us', 'ovh-ca']),
+            ovh_application_key = dict(required=True),
+            ovh_application_secret = dict(required=True),
+            ovh_consumer_key = dict(required=True)
         ),
         supports_check_mode = True
     )
