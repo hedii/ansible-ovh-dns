@@ -146,12 +146,12 @@ def main():
     state  = module.params.get('state')
 
     # Connect to OVH API
-    client = ovh.Client({
-        endpoint: module.params.get('ovh_endpoint'),
-        application_key: module.params.get('ovh_application_key'),
-        application_secret: module.params.get('ovh_application_secret'),
-        consumer_key: module.params.get('ovh_consumer_key')
-    })
+    client = ovh.Client(
+        endpoint=module.params.get('ovh_endpoint'),
+        application_key=module.params.get('ovh_application_key'),
+        application_secret=module.params.get('ovh_application_secret'),
+        consumer_key=module.params.get('ovh_consumer_key')
+    )
 
     # Check that the domain exists
     domains = client.get('/domain/zone')
